@@ -1,10 +1,10 @@
-# 🥛 Granja Lechera – API Web
+#  Granja Lechera – API Web
 
 **Taller de Lenguajes de Programación – Universidad Santiago de Cali**
 
 API REST desarrollada en C# y .NET 10 para gestionar una granja lechera mediante arquitectura en capas.
 
-## 📁 Estructura del proyecto
+##  Estructura del proyecto
 
 ```text
 Granja.slnx
@@ -36,7 +36,7 @@ Granja.slnx
     └── Pruebas unitarias xUnit
 ```
 
-## ⚙️ Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - C#
 - .NET 10
@@ -47,7 +47,7 @@ Granja.slnx
 - AutoMapper
 - xUnit
 
-## 🏗️ Arquitectura
+##  Arquitectura
 
 El proyecto utiliza arquitectura en capas:
 
@@ -59,7 +59,7 @@ El proyecto utiliza arquitectura en capas:
 
 Los controladores no acceden directamente al DbContext.
 
-## 🚀 Cómo ejecutar el proyecto
+##  Cómo ejecutar el proyecto
 
 ### Requisitos
 
@@ -96,7 +96,7 @@ dotnet ef database update -p Granja.Infrastructure -s Granja.Web
 dotnet run --project Granja.Web
 ```
 
-## 📖 Swagger
+##  Swagger
 
 Una vez iniciada la API, acceder a:
 
@@ -131,7 +131,7 @@ La dirección y el puerto pueden variar según la configuración de ejecución.
 | GET | `/api/reportes/producto-danado` | Productos dañados |
 | GET | `/api/reportes/vacas` | Estadísticas de producción de vacas |
 
-## 🧀 Reglas de negocio
+##  Reglas de negocio
 
 - Producción diaria calculada según el número de vacas y litros por vaca.
 - Transformación de leche en queso o yogurt.
@@ -142,7 +142,7 @@ La dirección y el puerto pueden variar según la configuración de ejecución.
 - Ventas atómicas: si no existe suficiente inventario, se rechaza la operación.
 - Registro de productos dañados.
 
-## 🧪 Pruebas
+##  Pruebas
 
 Para ejecutar las pruebas unitarias:
 
@@ -150,7 +150,7 @@ Para ejecutar las pruebas unitarias:
 dotnet test
 ```
 
-## 👨‍💻 Proyecto académico
+##  Proyecto académico
 
 **Asignatura:** Lenguajes de Programación  
 **Universidad:** Universidad Santiago de Cali  
