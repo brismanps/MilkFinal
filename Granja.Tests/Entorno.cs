@@ -33,7 +33,10 @@ public sealed class Entorno : IDisposable
         Db = new GranjaDbContext(new DbContextOptionsBuilder<GranjaDbContext>().UseSqlite(_conn).Options);
         DbInitializer.InicializarAsync(Db).GetAwaiter().GetResult();
 
-        IMapper mapper = new MapperConfiguration(c => c.AddProfile<MappingProfile>()).CreateMapper();
+        IMapper mapper = new MapperConfiguration(
+            c => c.AddProfile<MappingProfile>(),
+            Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory.Instance
+        ).CreateMapper();
         var clock = new FakeClock();
         var uow = new UnitOfWork(Db);
         var granjas = new GranjaRepository(Db);
