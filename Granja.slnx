@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Granja.Domain/Granja.Domain.csproj" />
+  <Project Path="Granja.Infrastructure/Granja.Infrastructure.csproj" />
+  <Project Path="Granja.Services/Granja.Services.csproj" />
+  <Project Path="Granja.Web/Granja.Web.csproj" />
+  <Project Path="Granja.Tests/Granja.Tests.csproj" />
+</Solution>

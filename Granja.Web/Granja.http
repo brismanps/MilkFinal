@@ -1,0 +1,88 @@
+@host = http://localhost:5080
+
+### Configuración
+GET {{host}}/api/granja
+
+### Cambiar n y l (y parámetros)
+PUT {{host}}/api/granja
+Content-Type: application/json
+
+{ "numeroVacas": 10, "litrosPorVaca": 15,
+  "parametros": [
+    { "tipo": "Queso",  "rendimiento": 10, "vidaUtilDias": 30, "precio": 28000 },
+    { "tipo": "Yogurt", "rendimiento": 1,  "vidaUtilDias": 15, "precio": 8000 } ] }
+
+### Escenario de referencia - Día 1
+POST {{host}}/api/produccion
+Content-Type: application/json
+
+{ "fecha": "2026-12-01" }
+
+###
+POST {{host}}/api/produccion/transformar
+Content-Type: application/json
+
+{ "tipo": "Queso", "litros": 100, "fecha": "2026-12-01" }
+
+###
+POST {{host}}/api/produccion/transformar
+Content-Type: application/json
+
+{ "tipo": "Yogurt", "litros": 50, "fecha": "2026-12-01" }
+
+### Día 2
+POST {{host}}/api/produccion
+Content-Type: application/json
+
+{ "fecha": "2026-12-02" }
+
+###
+POST {{host}}/api/produccion/transformar
+Content-Type: application/json
+
+{ "tipo": "Queso", "litros": 150, "fecha": "2026-12-02" }
+
+### Día 3 - ventas
+POST {{host}}/api/ventas
+Content-Type: application/json
+
+{ "tipoProducto": "Queso", "cantidad": 12, "fecha": "2026-12-03" }
+
+###
+POST {{host}}/api/ventas
+Content-Type: application/json
+
+{ "tipoProducto": "Yogurt", "cantidad": 20, "fecha": "2026-12-03" }
+
+### Día 17 - vencimientos
+POST {{host}}/api/inventario/procesar-vencimientos?fecha=2026-12-17
+
+### Día 17 - venta rechazada (409)
+POST {{host}}/api/ventas
+Content-Type: application/json
+
+{ "tipoProducto": "Yogurt", "cantidad": 5, "fecha": "2026-12-17" }
+
+### Inventario
+GET {{host}}/api/inventario?fecha=2026-12-17
+
+### Próximos a vencer
+GET {{host}}/api/inventario/proximos-a-vencer?dias=3&fecha=2026-12-14
+
+### Reportes
+GET {{host}}/api/reportes/ventas?desde=2026-12-01&hasta=2026-12-31
+
+###
+GET {{host}}/api/reportes/leche-diaria?desde=2026-12-01&hasta=2026-12-31
+
+###
+GET {{host}}/api/reportes/productodiario?desde=2026-12-01&hasta=2026-12-31
+
+###
+GET {{host}}/api/reportes/producto-total
+
+###
+GET {{host}}/api/reportes/productodanado?desde=2026-12-01&hasta=2026-12-31
+
+###
+GET {{host}}/api/reportes/vacas
