@@ -1,10 +1,10 @@
-#  Granja Lechera – API Web
+# Granja Lechera – API Web
 
 **Taller de Lenguajes de Programación – Universidad Santiago de Cali**
 
 API REST desarrollada en C# y .NET 10 para gestionar una granja lechera mediante arquitectura en capas.
 
-##  Estructura del proyecto
+## Estructura del proyecto
 
 ```text
 Granja.slnx
@@ -19,7 +19,8 @@ Granja.slnx
 │   ├── Entity Framework Core
 │   ├── SQLite
 │   ├── Configuraciones
-│   └── Repositorios
+│   ├── Repositorios
+│   └── Data/Migrations
 │
 ├── Granja.Services
 │   ├── Servicios
@@ -47,7 +48,7 @@ Granja.slnx
 - AutoMapper
 - xUnit
 
-##  Arquitectura
+## Arquitectura
 
 El proyecto utiliza arquitectura en capas:
 
@@ -59,44 +60,55 @@ El proyecto utiliza arquitectura en capas:
 
 Los controladores no acceden directamente al DbContext.
 
-##  Cómo ejecutar el proyecto
+## Cómo ejecutar el proyecto
 
 ### Requisitos
 
 - SDK de .NET 10.
 - Visual Studio 2022 compatible con .NET 10.
+- Herramienta de línea de comandos `dotnet-ef`.
 
-### 1. Restaurar dependencias
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/brismanps/MilkFinal.git
+```
+
+### 2. Entrar en la carpeta del proyecto
+
+```bash
+cd MilkFinal
+```
+
+### 3. Restaurar dependencias
 
 ```bash
 dotnet restore
 ```
 
-### 2. Instalar herramienta de migraciones
+### 4. Instalar la herramienta de migraciones
+
+Si todavía no está instalada:
 
 ```bash
 dotnet tool install --global dotnet-ef
 ```
 
-### 3. Crear migración inicial
+### 5. Aplicar las migraciones existentes
 
 ```bash
-dotnet ef migrations add Inicial -p Granja.Infrastructure -s Granja.Web -o Data/Migrations
+dotnet ef database update --project Granja.Infrastructure --startup-project Granja.Web
 ```
 
-### 4. Actualizar base de datos
+Este comando aplica las migraciones incluidas en el repositorio y actualiza la base de datos. No es necesario crear una migración nueva.
 
-```bash
-dotnet ef database update -p Granja.Infrastructure -s Granja.Web
-```
-
-### 5. Ejecutar la API
+### 6. Ejecutar la API
 
 ```bash
 dotnet run --project Granja.Web
 ```
 
-##  Swagger
+## Swagger
 
 Una vez iniciada la API, acceder a:
 
@@ -104,7 +116,7 @@ Una vez iniciada la API, acceder a:
 
 La dirección y el puerto pueden variar según la configuración de ejecución.
 
-## 🔗 Endpoints principales
+## Endpoints principales
 
 | Método | Ruta | Descripción |
 |---|---|---|
@@ -131,7 +143,7 @@ La dirección y el puerto pueden variar según la configuración de ejecución.
 | GET | `/api/reportes/producto-danado` | Productos dañados |
 | GET | `/api/reportes/vacas` | Estadísticas de producción de vacas |
 
-##  Reglas de negocio
+## Reglas de negocio
 
 - Producción diaria calculada según el número de vacas y litros por vaca.
 - Transformación de leche en queso o yogurt.
@@ -142,7 +154,7 @@ La dirección y el puerto pueden variar según la configuración de ejecución.
 - Ventas atómicas: si no existe suficiente inventario, se rechaza la operación.
 - Registro de productos dañados.
 
-##  Pruebas
+## Pruebas
 
 Para ejecutar las pruebas unitarias:
 
@@ -150,7 +162,9 @@ Para ejecutar las pruebas unitarias:
 dotnet test
 ```
 
-##  Proyecto académico
+El proyecto cuenta con pruebas unitarias desarrolladas con xUnit.
+
+## Proyecto académico
 
 **Asignatura:** Lenguajes de Programación  
 **Universidad:** Universidad Santiago de Cali  
